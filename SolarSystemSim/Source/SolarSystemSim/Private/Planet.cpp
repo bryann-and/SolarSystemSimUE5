@@ -41,15 +41,16 @@ void APlanet::UpdateVelocity(TArray<APlanet*> planetsToConsider, float deltaTime
 		/*
 		* F= g*(m1*m2 / d^2)
 		*/
-		float distanceSqrt = (currentLocation - planet->GetActorLocation()).SquaredLength();
-		FVector direction = (currentLocation - planet->GetActorLocation());
+		float distanceSqrt = (planet->GetActorLocation() - currentLocation).SquaredLength();
+		FVector direction = (planet->GetActorLocation() - currentLocation);
 		direction.Normalize();
 		FVector force = direction * gravity * (this->MassKg * planet->MassKg / distanceSqrt);
 
 		FVector acceleration = force / this->MassKg;
 		CurrentVelocity += acceleration * deltaTime;
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::Printf(TEXT("Mass: %f"), planet->MassKg));
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, CurrentVelocity.ToString());
 	}
-	this->SetActorLocation(CurrentVelocity);
+	
+	this->SetActorLocation(currentLocation + CurrentVelocity);
 }
 

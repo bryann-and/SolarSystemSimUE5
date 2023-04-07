@@ -13,7 +13,6 @@ class SOLARSYSTEMSIM_API APlanet : public AActor
 	
 private:
 	FVector CurrentVelocity;	
-	double gravity = 0.00000066743;
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,6 +25,8 @@ public:
 	float MassKg;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<APlanet*> PlanetsToConsider;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	double gravity = 0.00000066743;
 
 	// Sets default values for this actor's properties
 	APlanet();
