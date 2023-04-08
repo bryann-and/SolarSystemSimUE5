@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Planet.h"
 
 // Sets default values
@@ -15,6 +14,7 @@ APlanet::APlanet()
 void APlanet::BeginPlay()
 {	
 	CurrentVelocity = StatingVelocity;
+	MassKg = ConvertScientificToNumber(MassKgInScientificNotation);
 
 	Super::BeginPlay();	
 }
@@ -52,5 +52,12 @@ void APlanet::UpdateVelocity(TArray<APlanet*> planetsToConsider, float deltaTime
 	}
 	
 	this->SetActorLocation(currentLocation + CurrentVelocity);
+}
+
+double APlanet::ConvertScientificToNumber(FString massKgSN)
+{
+	double result = FCString::Atod(*massKgSN);
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::Printf(TEXT("Mass: %f"), result));
+	return result;
 }
 

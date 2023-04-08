@@ -12,17 +12,20 @@ class SOLARSYSTEMSIM_API APlanet : public AActor
 	GENERATED_BODY()
 	
 private:
-	FVector CurrentVelocity;	
+	FVector CurrentVelocity;		
 
 protected:
+	// Stores the mass after being converted from 'MassKgInScientificNotation'
+	double MassKg;
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:		
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector StatingVelocity;
+	/*Mass in Scientific notation, ex: 3.30200e23*/
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float MassKg;
+	FString MassKgInScientificNotation;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<APlanet*> PlanetsToConsider;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -34,5 +37,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void UpdateVelocity(TArray<APlanet*> planetsToConsider, float deltaTime);
+
+	double ConvertScientificToNumber(FString massKgSN);
 
 };
