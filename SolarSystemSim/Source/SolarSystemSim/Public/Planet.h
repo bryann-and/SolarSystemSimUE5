@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "HelpersLibrary.h"
 #include "Planet.generated.h"
 
 UCLASS(Blueprintable)
@@ -13,6 +14,8 @@ class SOLARSYSTEMSIM_API APlanet : public AActor
 	
 private:
 	FVector CurrentVelocity;		
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere) // Can't show up in the editor otherwise gets reduced to 0.00...01
+	double gravity = 0.00000066743;
 
 protected:
 	// Stores the mass after being converted from 'MassKgInScientificNotation'
@@ -20,7 +23,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:		
+public:
+	/*Celestial Body/Planet's name, will be used for HUD naming*/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FString CelestialName;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector StatingVelocity;
 	/*Mass in Scientific notation, ex: 3.30200e23*/
@@ -28,8 +34,7 @@ public:
 	FString MassKgInScientificNotation;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<APlanet*> PlanetsToConsider;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	double gravity = 0.00000066743;
+	
 
 	// Sets default values for this actor's properties
 	APlanet();
