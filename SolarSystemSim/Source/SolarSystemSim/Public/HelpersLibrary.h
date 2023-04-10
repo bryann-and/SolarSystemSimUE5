@@ -17,4 +17,6 @@ public:
 	static const double MassDevider;
 
 	static double ConvertScientificToNumber(FString massKgSN);
+
+	static void CalculateOrbitPoints(FVector centerPlanetPos, FVector thisPlanetPos, double& Aphelion, double& Perihelion);
 };

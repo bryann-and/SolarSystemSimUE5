@@ -13,7 +13,9 @@ class SOLARSYSTEMSIM_API APlanet : public AActor
 	GENERATED_BODY()
 	
 private:
-	FVector CurrentVelocity;		
+	FVector CurrentVelocity;	
+	/*Used for checking with 'StatingVelocity' to see if the user changed the starting velocity in the UI*/
+	FVector StartingVelocityCheck;
 	//UPROPERTY(BlueprintReadWrite, EditAnywhere) // Can't show up in the editor otherwise gets reduced to 0.00...01
 	double gravity = 0.00000066743;
 
@@ -28,12 +30,15 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString CelestialName;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FVector StatingVelocity;
+	FVector StartingVelocity;
 	/*Mass in Scientific notation, ex: 3.30200e23*/
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString MassKgInScientificNotation;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<APlanet*> PlanetsToConsider;
+
+	double Aphelion;
+	double Perihelion;
 	
 
 	// Sets default values for this actor's properties
@@ -43,6 +48,5 @@ public:
 
 	void UpdateVelocity(TArray<APlanet*> planetsToConsider, float deltaTime);
 
-	double ConvertScientificToNumber(FString massKgSN);
-
+	void PrintOrbitInfo();
 };
