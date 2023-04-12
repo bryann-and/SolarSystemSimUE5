@@ -14,8 +14,10 @@ AOrbitInfo::AOrbitInfo()
 // Called when the game starts or when spawned
 void AOrbitInfo::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay();	
+
+	Aphelion = UHelpersLibrary::ConvertScientificToNumber(AphelionInKm);
+	Perihelion = UHelpersLibrary::ConvertScientificToNumber(PerihelionInKm);
 }
 
 // Called every frame
@@ -23,5 +25,17 @@ void AOrbitInfo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// User changed Starting Velocity in the UI
+	if (StartingVelocityCheck != StartingVelocity)
+	{
+		StartingVelocityCheck = StartingVelocity;
+		CurrentVelocity = StartingVelocity;
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::Printf(TEXT("Starting velocity changed on: %s"), *CurrentVelocity.ForwardVector.ToString()));
+	}
+}
+
+void AOrbitInfo::PrintOrbitInfo()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Red, FString::Printf(TEXT("%s Aphelion: %s | Perihelion: %s"), *Planet->CelestialName, *AphelionInKm, *PerihelionInKm));
 }
 

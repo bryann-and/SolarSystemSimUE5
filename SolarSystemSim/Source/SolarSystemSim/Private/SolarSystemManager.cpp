@@ -22,6 +22,25 @@ void ASolarSystemManager::BeginPlay()
 void ASolarSystemManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
 
+void ASolarSystemManager::UpdateVelocity(TArray<APlanet*> planetsToConsider, float deltaTime)
+{
+	//for (auto& planet : planetsToConsider)
+	//{
+	//	/*
+	//	* F= g*(m1*m2 / d^2)
+	//	*/
+	//	float distanceSqr = (planet->GetActorLocation() - this->GetActorLocation()).SquaredLength();
+	//	FVector direction = (planet->GetActorLocation() - this->GetActorLocation());
+	//	direction.Normalize();
+	//	FVector force = direction * gravity * (this->MassKg * planet->MassKg / distanceSqr);
+
+	//	FVector acceleration = force / this->MassKg;
+	//	CurrentVelocity += acceleration * deltaTime;
+	//	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, CurrentVelocity.ToString());
+	//}
+
+	//this->SetActorLocation(this->GetActorLocation() + CurrentVelocity);
 }
 

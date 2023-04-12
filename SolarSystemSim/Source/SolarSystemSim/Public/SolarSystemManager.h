@@ -23,9 +23,11 @@ public:
 	APlanet* CenterBody;
 	UPROPERTY(BlueprintReadWrite)
 	TArray<AOrbitInfo*> Orbits;
+
 	// Sets default values for this actor's properties
 	ASolarSystemManager();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void UpdateVelocity(TArray<APlanet*> planetsToConsider, float deltaTime);
 };
